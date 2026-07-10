@@ -1,21 +1,17 @@
 `timescale 1ns / 1ps
 
-// This module implements a single neuron using the Floating-Point Unit (FPU) modules.
-// It calculates the weighted sum: sum = sum(x_i * w_i) + bias
-// For MNIST, x_i are the 784 input pixels.
 
 module neuron_fpu (
     input clk,
     input reset,
     input start,
-    input [31:0] pixel_in,   // Single pixel input (IEEE-754)
-    input [31:0] weight_in,  // Corresponding weight (IEEE-754)
-    input [31:0] bias,       // Bias for this neuron (IEEE-754)
+    input [31:0] pixel_in,   
+    input [31:0] weight_in,  
+    input [31:0] bias,       
     output reg [31:0] result,
     output reg done
 );
 
-    // State machine states
     localparam IDLE = 3'd0;
     localparam MULTIPLY = 3'd1;
     localparam ADD = 3'd2;
@@ -23,7 +19,7 @@ module neuron_fpu (
     localparam FINISH = 3'd4;
 
     reg [2:0] state;
-    reg [9:0] counter; // To count 784 pixels
+    reg [9:0] counter; 
 
     // FPU Signals
     reg [31:0] fadd_a, fadd_b;
@@ -80,7 +76,7 @@ module neuron_fpu (
                         state <= BIAS_ADD;
                     end else begin
                         counter <= counter + 1;
-                        state <= MULTIPLY; // In a real system, you'd wait for data
+                        state <= MULTIPLY;
                     end
                 end
 
