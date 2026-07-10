@@ -1,12 +1,11 @@
 `timescale 1ns / 1ps
 
-//  basic MNIST ANN (Single Layer)
 
 module mnist_ann_top (
     input clk,
     input reset,
     input start,
-    input [31:0] data_bus, // Input pixels/weights from memory
+    input [31:0] data_bus, 
     output [3:0] prediction,
     output ready
 );
